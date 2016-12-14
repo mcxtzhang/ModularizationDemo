@@ -1,1 +1,8 @@
+//主壳  必备的
 include ':app'
+
+//debug 是Application， release 是 aar
+include ':bbs'
+
+//公共库 必备的
+include ':common-lib'

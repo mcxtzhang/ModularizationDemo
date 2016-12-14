@@ -26,4 +26,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
+
+    if (!modularizationDebug.toBoolean()) {
+        compile project(':bbs')
+    }
+
 }
