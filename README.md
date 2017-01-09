@@ -46,13 +46,10 @@ Android开发**额外好处**：**提升编译速度**。
 
 但是组件化能救我们。它能做到：
 通过**拆分各个模块**，做到业务模块彼此毫无关联（不强耦合）。
-开发时，只**“勾选”**上**需要调试的模块**。
+开发时，只 **“勾选”** 上 **需要调试的模块**。 
 其他模块的代码被**排除在外根本不会编译**进来。
 
-听着就很厉害，不知道实现起来难不难。插件化，我们已经从入门到放弃了，这一次组件化原本我也要放弃
-。
-不过前人栽树后人乘凉，感谢老钱和伟哥之前做的工作，分离模块，Router，使得有了俺来也组件化之路的基础和第一版。
-（todolist，写一个 **路由框架**。）
+
 
 
 ## 2 市面上的组件化的实践
@@ -73,7 +70,9 @@ Android开发**额外好处**：**提升编译速度**。
 **Release时，一切照旧**。
 **Debug时，每个业务模块是一个APP形式**，可以单独编译运行，这就解决了上述痛点，大幅度加快了编译的速度。
 
-#### how to do
+#### how to do 
+![](https://dn-mhke0kuv.qbox.me/87efc788b282fadc3b84.gif)
+
 Debug阶段的截图：
 
 ![](https://dn-mhke0kuv.qbox.me/4aa95704e3711a6e232f.png)
@@ -99,7 +98,7 @@ Release时：
 
 ![](https://dn-mhke0kuv.qbox.me/6d3d87115c8a80d6cf35.png)
 
-3 bbs/src/main 下 新建2 个目录，debug，release， 将以前的AndroidManifest.xml 挪到 release里。
+3 bbs/src/main 下 新建2 个目录，debug，release， 将以前的AndroidManifest.xml 挪到 release里。  
 复制一`AndroidManifest.xml`份到debug下，也可以新建一个Activity作为该业务模块入口Activity，
 并在入口Activity处 添加：
 ```
@@ -117,11 +116,21 @@ Release时：
 至此各个模块就已经拆分完成了，它保证了各个模块之间绝对不会混合调用，出现上图混乱情况。
 但是仍然有一些问题需要我们去解决：
 
-* 不同业务模块(module)的**跳转**。（路由设计实现），以后各模块跳转都要通过路由模块来分发.
+* 不同业务模块(module)的**跳转**。（路由设计实现）
 
-![](https://dn-mhke0kuv.qbox.me/7dacf1abc4284bff5e7a.png)
 * 不同业务模块(module)**资源命名冲突**。 解决方案：在组内约束，加上模块前缀,`drawable`、`layout`都是如此。例如`friend_anim_location_loading.xml`  `friend_fragment_add_friend.xml`
 * 不同业务模块(module)重复依赖某个相同的库。 解决方案：依赖转交由底层`commonlib`库依赖，上层业务模块只依赖`commonlib`库.
+
+关于路由模块，以后各模块跳转都要通过路由模块来**分发.**，示意图如下：
+
+![](https://dn-mhke0kuv.qbox.me/7dacf1abc4284bff5e7a.png)
+
+这一块其实是一个重点，市面上的方案也有一些，我也有开发一个路由出来的打算：
+我在Demo里是用了反射来做的，以String的形式写死全类名，**避免xxx.class的情况，就避免了强耦合**。
+
+![](https://dn-mhke0kuv.qbox.me/a1f803a6f4a5e3099e67.png)
+
+
 
 还有一些其他要考虑的东西。比如有一些不存在UI的业务，或者说一些业务没办法独立运行，需要一个**触发源**。这种情况下，最理想的方式是**通过其他某个已存在的module去触发它们**，或者使用一**个类似于DebugLauncherActivity的东西**来当作触发源，而这样的DebugOnly的东西是**不应该打包到Release模式中的**，所以我们需要通过**gradle配置去做一些自动化**的东西。
 针对`DebugLauncherActivity`我们需要做如下修改：
@@ -135,6 +144,8 @@ Release时：
 ![](https://dn-mhke0kuv.qbox.me/9a91857d8a086c5bd833.png)
 ![](https://dn-mhke0kuv.qbox.me/96d6f03ae5f9a8eabdef.png)
 ![](https://dn-mhke0kuv.qbox.me/bcaed8997feea29f5c5c.png)
+在模块内部，其实也最好采用router的形式跳转，避免强耦合类名，以免有一天产品告诉你“把xx模块的xx挪到xxx模块吧”
+![](https://dn-mhke0kuv.qbox.me/b4fc94f23c173280b04c.png)
 
 通过上面这种方式，我们就可以在Release的环境下去除掉debug包里的东西 。
 另外需要两个Manifest文件的原因是在Debug模式下，我们需要一个Activity标示为MAIN和LAUNCHER，而Release模式下则不需要。
@@ -145,7 +156,7 @@ Release时：
 
 市面上的组件化概念就是这样了。至此已介绍的差不多。
 
-![](https://dn-mhke0kuv.qbox.me/87efc788b282fadc3b84.gif)
+
 
 ![](https://dn-mhke0kuv.qbox.me/fd81ff691fe2bf056b62.gif)
 
@@ -153,12 +164,18 @@ Release时：
 
 ## 3 俺来也特色社会主义的组件化实践
 
-上述常用方案，也有一些缺点
+组件化听着就很厉害，不知道实现起来难不难。插件化，我们已经从入门到放弃了，这一次组件化原本我也要放弃
+。
+不过前人栽树后人乘凉，感谢兴君、老钱和伟哥之前做的工作，分离模块，Router，还有一次兴君与我讨论的问题，他以Android视图模式查看，发现包结构不对劲，给了我启发，使得有了俺来也组件化之路的基础和第一版。
+（todolist，写一个 **路由框架**。）
+
+
+首先说上述常用方案，也有一些缺点
 缺点：
 
 * AndroidManifest.xml的同步问题，开发中经常修改，要复制来复制去，复制就容易出错，**有风险**。
 * 通过一个debug开关区分所有业务模块，如果在开发阶段需要多个业务模块联动测试，则无法实现。即，Debug模式下，想通过App主模块调用其他业务模块也有困难。此时是没有办法通过compile的方式去实现的，因为Debug模式下各个业务线是Application，没有办法compile，这种时候，你就需要手动去将业务module的AAR添加到App中进行依赖。
-*
+* 
 
 结合我们俺来也的实际情况，以及上述的一些缺点。才有了**俺来也特色社会主义的组件化**
 
@@ -182,14 +199,20 @@ Release时：
 完美解决传统方案的bug
 
 
+## 进度
+目前**俺有才**模块已经成功剥离，其他模块仍处于混乱之中。
 
-注意事项：
+## 遇到的问题
 
-* 每次修改`modularizationDebug`参数时，要让gradle sync一次。
+
+
+## 注意事项：
+
+* 每次修改`modularizationDebug`参数时，要让`gradle sync`一次。
 * 组件化后，全局修改base类的东西，应该把所有模块 都勾选编译，否则 AS 开发工具帮我们自动改名可能会漏。
 
 
-关于组件化的思考：
+## 关于组件化的思考：
 
 说了这么多，相信大家对组件化已经有了一个大致的概念，也知道了我们为什么要使用组件化。而在我看来，这样的技术其实对于纯开发而言难度是不大的，真正的难度在于如何**剥离现有的业务线**。粒度大拆分比较容易，但是不利于今后的维护。粒度小需要对业务有很深的理解，但是能很好的解耦并且提高灵活度，所以具体的情况需要在具体的实际开发中进行分析。
 
