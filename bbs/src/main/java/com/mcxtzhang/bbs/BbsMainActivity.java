@@ -1,5 +1,6 @@
 package com.mcxtzhang.bbs;
 
+
 import android.os.Bundle;
 
 import com.mcxtzhang.common_lib.BaseActivity;
