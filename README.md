@@ -74,6 +74,7 @@ Android开发**额外好处**：**提升编译速度**。
 #### how to do 
 
 假装这是一个App。下面是首页，和跳转到某个业务模块的gif：
+
 ![](https://dn-mhke0kuv.qbox.me/87efc788b282fadc3b84.gif)
 
 Debug阶段的截图：
