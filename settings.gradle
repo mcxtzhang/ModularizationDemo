@@ -6,3 +6,6 @@ include ':bbs'
 
 //公共库 必备的
 include ':common-lib'
+
+
+include  ':library', ':compiler'

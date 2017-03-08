@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.neenbedankt.android-apt'
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -10,6 +13,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -30,5 +40,11 @@ dependencies {
     if (!modularizationDebug.toBoolean()) {
         compile project(':bbs')
     }
+
+
+    apt project(':compiler')
+
+    compile project(':common-lib')
+
 
 }

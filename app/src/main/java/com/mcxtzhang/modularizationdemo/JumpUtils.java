@@ -1,10 +1,13 @@
 package com.mcxtzhang.modularizationdemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
+
+import com.apt.ZRouter;
 
 import java.util.List;
 
@@ -20,15 +23,17 @@ public class JumpUtils {
 
     private static final String PK_NAME = "com.mcxtzhang";
 
-    public static void jumpToModule1(Context context) {
+    public static void jumpToModule1(Activity activity) {
         //startActivity(new Intent(MainActivity.this, BbsMainActivity.class));
-        Intent intent = new Intent();
+/*        Intent intent = new Intent();
         try {
             intent.setClass(context,Class.forName("com.mcxtzhang.bbs.BbsMainActivity"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        jumpToActivity(context, intent);
+        jumpToActivity(context, intent);*/
+
+        ZRouter.getInstance().jump(activity, "bbs/Main", null);
     }
 
     public static void jumpToActivity(Context context, Intent intent) {
