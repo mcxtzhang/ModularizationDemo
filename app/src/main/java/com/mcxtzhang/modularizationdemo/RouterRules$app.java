@@ -1,7 +1,7 @@
 package com.mcxtzhang.modularizationdemo;
 
 /**
- * Intro:  a stub，provided only in compile time ,
+ * Intro:
  * Author: zhangxutong
  * E-mail: mcxtzhang@163.com
  * Home Page: http://blog.csdn.net/zxt0601
@@ -10,11 +10,10 @@ package com.mcxtzhang.modularizationdemo;
  */
 
 /**
- * created by apt
+ * auto creatd by apt
  */
-public class RouterRules {
+public class RouterRules$app {
     public static void init() {
-        RouterRules$app.init();
-        RouterRules$bbs.init();
+        RouterManager.addRule("main", "com.mcxtzhang.modularizationdemo.MainActivity");
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,24 +23,21 @@ public class RouterManager {
 
     private static final String TAG = "zxt/ZRouter";
 
-    private static Map<String, String> routerMap;
+    private static Map<String, String> routerMap = new HashMap<>();
 
-/*    private ZRouter() {
-        routerMap = new HashMap();
-        routerMap.put("main", "com.mcxtzhang.modularizationdemo.MainActivity");
+    public static void addRule(String pagePath, String pageClsName) {
+        routerMap.put(pagePath, pageClsName);
     }
 
-    public static ZRouter getInstance() {
-        return ZRouter.InnerClass.INSTANCE;
-    }*/
-
     private static void initRouterMap() {
-        if (routerMap == null) {
-
+        if (routerMap.isEmpty()) {
+            RouterRules.init();
         }
     }
 
     public static void jump(Activity activity, String where, Bundle bundle) {
+        initRouterMap();
+
         String clsFullName = routerMap.get(where);
         if (TextUtils.isEmpty(clsFullName)) {
             Log.e(TAG, "Error in jump() where = [" + where + "] not found in routerMap!");
@@ -55,6 +53,9 @@ public class RouterManager {
     }
 
     public static void jump(Activity activity, String where, Bundle bundle, int requestCode) {
+        initRouterMap();
+
+
         String clsFullName = routerMap.get(where);
         if (TextUtils.isEmpty(clsFullName)) {
             Log.e(TAG, "Error in jump() where = [" + where + "] not found in routerMap!");
