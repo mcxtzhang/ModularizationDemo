@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mcxtzhang.zrouter.RouterManager;
+
 public class LauncherActivity extends AppCompatActivity {
 
     @Override
@@ -13,7 +15,7 @@ public class LauncherActivity extends AppCompatActivity {
         getWindow().getDecorView().findViewById(R.id.activity_launcher).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouterManager.jump(LauncherActivity.this, "main", null);
+                RouterManager.jump(LauncherActivity.this, "bbs/Main", null);
             }
         });
 

@@ -1,4 +1,4 @@
-package com.mcxtzhang.modularizationdemo;
+package com.mcxtzhang.zrouter;
 
 import android.app.Activity;
 import android.content.ComponentName;

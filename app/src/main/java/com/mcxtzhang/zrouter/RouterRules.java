@@ -1,4 +1,4 @@
-package com.mcxtzhang.modularizationdemo;
+package com.mcxtzhang.zrouter;
 
 /**
  * Intro:  a stub，provided only in compile time ,

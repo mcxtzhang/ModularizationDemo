@@ -25,6 +25,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
+
 /**
  * Intro: Use ComponentName replace Class
  * Author:zhangxutong
@@ -39,11 +40,18 @@ import javax.lang.model.util.Elements;
 public class ZRouter2Processor extends AbstractProcessor {
 
     private Elements mElementUtils;
+    private String moduleName;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         mElementUtils = processingEnv.getElementUtils();
+
+        Map<String, String> options = processingEnv.getOptions();
+        if (null != options && !options.isEmpty()) {
+            moduleName = options.get(Config.KEY_MODULE_NAME);
+        }
+
     }
 
     @Override
