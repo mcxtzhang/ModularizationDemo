@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/common-lib" />
             <option value="$PROJECT_DIR$/compiler" />
             <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/zrouter-api" />
+            <option value="$PROJECT_DIR$/zrouter-stub" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

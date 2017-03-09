@@ -15,7 +15,7 @@ import javax.lang.model.util.Elements;
 
 public class AptUtils {
     public static boolean DEBUG = true;
-    public static final String PKG_NAME = "com.mcxtzhang.apt";
+    public static final String PKG_NAME = "com.mcxtzhang.zrouter";
 
     public static String getPkgName(Elements element, TypeElement type) /*throws Exception */ {
 

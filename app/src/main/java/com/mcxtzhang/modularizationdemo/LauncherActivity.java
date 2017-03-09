@@ -1,11 +1,13 @@
 package com.mcxtzhang.modularizationdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.mcxtzhang.zrouter.RouterManager;
+import com.example.ZRouter;
+import com.mcxtzhang.zrouter.ZRouterManager;
 
+@ZRouter(path = "launcher")
 public class LauncherActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class LauncherActivity extends AppCompatActivity {
         getWindow().getDecorView().findViewById(R.id.activity_launcher).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouterManager.jump(LauncherActivity.this, "bbs/Main", null);
+                ZRouterManager.jump(LauncherActivity.this, "main", null);
             }
         });
 

@@ -1,6 +1,5 @@
 package com.example;
 
-import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -18,7 +17,6 @@ import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -36,7 +34,6 @@ import javax.lang.model.util.Elements;
  * 2017/02/04 add : Auto bind params in bundle for target Activity/Fragment.
  */
 
-@AutoService(Processor.class)
 public class ZRouter2Processor extends AbstractProcessor {
 
     private Elements mElementUtils;

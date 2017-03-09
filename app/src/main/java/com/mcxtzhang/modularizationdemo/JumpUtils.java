@@ -7,7 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
 
-import com.mcxtzhang.apt.ZRouter;
+import com.example.ZModules;
+import com.mcxtzhang.zrouter.ZRouterManager;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
  * 时间： 2016/12/14.
  */
 
+@ZModules({"app", "bbs"})
 public class JumpUtils {
 
     private static final String PK_NAME = "com.mcxtzhang";
@@ -33,7 +35,7 @@ public class JumpUtils {
         }
         jumpToActivity(context, intent);*/
 
-        ZRouter.getInstance().jump(activity, "bbs/Main", null);
+        ZRouterManager.jump(activity, "bbs/Main", null);
     }
 
     public static void jumpToActivity(Context context, Intent intent) {
