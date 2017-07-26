@@ -1,7 +1,5 @@
 package com.mcxtzhang.zrouter;
 
-import android.app.Activity;
-
 /**
  * Intro:
  * Author: zhangxutong
@@ -11,6 +9,6 @@ import android.app.Activity;
  * History:
  */
 
-public interface IZParamsBinding<T extends Activity> {
-    void bind(T activity);
+public interface IZParamsBinding<T> {
+    void bind(T target);
 }

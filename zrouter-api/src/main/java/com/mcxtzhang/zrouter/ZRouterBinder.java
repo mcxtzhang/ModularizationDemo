@@ -1,7 +1,5 @@
 package com.mcxtzhang.zrouter;
 
-import android.app.Activity;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,15 +19,15 @@ public class ZRouterBinder {
     private static Map<String, IZParamsBinding> classCache = new LinkedHashMap<>();
 
 
-    public static void bind(Activity activity) {
-        String className = activity.getClass().getName();
+    public static void bind(Object target) {
+        String className = target.getClass().getName();
         try {
             if (!blackList.contains(className)) {
                 IZParamsBinding paramsBinding = classCache.get(className);
                 if (null == paramsBinding) {  // No cache.
                     paramsBinding = (IZParamsBinding) Class.forName(className + "ZParamsBinding").getConstructor().newInstance();
                 }
-                paramsBinding.bind(activity);
+                paramsBinding.bind(target);
                 classCache.put(className, paramsBinding);
             }
         } catch (Exception ex) {

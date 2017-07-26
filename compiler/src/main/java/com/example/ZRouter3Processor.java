@@ -110,71 +110,41 @@ public class ZRouter3Processor extends AbstractProcessor {
             initBuilder.addStatement("$T.addRule($S, $S)", RouterManagerClass, zRouter.path(), className);
 
             //2017 02 04 add auto bind params value in bundle for target activity
+
+            TypeMirror TYPE_ACTIVITY = mElementUtils.getTypeElement("android.app.Activity").asType();
+            TypeMirror TYPE_FRAGMENT = mElementUtils.getTypeElement("android.app.Fragment").asType();
+            TypeMirror TYPE_PARCELABLE = mElementUtils.getTypeElement("android.os.Parcelable").asType();
+
+            boolean isActivity = mTypes.isSubtype(typeElement.asType(), TYPE_ACTIVITY);
+
+
             List<? extends Element> members = mElementUtils.getAllMembers(typeElement);
             MethodSpec.Builder bindViewMethodSpecBuilder = MethodSpec.methodBuilder("bind")
                     .addModifiers(Modifier.PUBLIC/*, Modifier.STATIC*/)
-                    .returns(TypeName.VOID)
-                    //RxActivity activity
-                    .addParameter(ClassName.get(typeElement.asType()), "activity")
-                    .addStatement("$T intent = activity.getIntent()", ClassName.get("android.content", "Intent"))
-                    .beginControlFlow("if (null != intent)")
-                    .addStatement("$T extras = intent.getExtras()", ClassName.get("android.os", "Bundle"))
-                    .beginControlFlow("if (null != extras)");
+                    .returns(TypeName.VOID);
+            if (isActivity) {
+                bindViewMethodSpecBuilder.addParameter(ClassName.get(typeElement.asType()), "activity")
+                        .addStatement("$T intent = activity.getIntent()", ClassName.get("android.content", "Intent"))
+                        .beginControlFlow("if (null != intent)")
+                        .addStatement("$T extras = intent.getExtras()", ClassName.get("android.os", "Bundle"))
+                        .beginControlFlow("if (null != extras)");
+            } else {
+                bindViewMethodSpecBuilder.addParameter(ClassName.get(typeElement.asType()), "activity")
+                        .addStatement("$T extras = activity.getArguments()", ClassName.get("android.os", "Bundle"))
+                        .beginControlFlow("if (null != extras)");
+            }
+
+
             for (Element item : members) {
-                ZParams diView = item.getAnnotation(ZParams.class);
-                if (diView == null) {
-                    continue;
-                }
-                TypeMirror fieldType = item.asType();
-                String fieldTypeName = fieldType.toString();
-                switch (fieldTypeName) {
-                    case "byte":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getByte(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "byte[]":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getByteArray(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "char":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getChar(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "char[]":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getCharArray(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "float":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getFloat(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "float[]":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getFloatArray(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "ArrayList<Integer>":
-                    case "List<Integer>":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getIntegerArrayList(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "boolean[]":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getBooleanArrayExtra(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "boolean":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getBooleanExtra(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "java.lang.String":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getString(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    case "int":
-                    case "Integer":
-                        bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getInt(\"%s\")", item.getSimpleName(), diView.value()));
-                        break;
-                    default:
-                        if (mTypes.isSubtype(fieldType, mElementUtils.getTypeElement("android.os.Parcelable").asType())) {  // PARCELABLE
-                            bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getParcelable(\"%s\")", item.getSimpleName(), diView.value()));
-                        }else {
-                            bindViewMethodSpecBuilder.addStatement(String.format("%s = (\"%s\") (%s)", item.getSimpleName(), diView.value(), fieldType.toString()));
-                        }
-                        break;
-                }
+                buildGetParamsStatement(TYPE_PARCELABLE, bindViewMethodSpecBuilder, item);
 
             }
-            bindViewMethodSpecBuilder.endControlFlow()
-                    .endControlFlow();
+            if (isActivity) {
+                bindViewMethodSpecBuilder.endControlFlow()
+                        .endControlFlow();
+            } else {
+                bindViewMethodSpecBuilder.endControlFlow();
+            }
 
 
             ParameterizedTypeName IZParamsBinding = ParameterizedTypeName.get(ClassName.get("com.mcxtzhang.zrouter", "IZParamsBinding"), ClassName.get(typeElement.asType()));
@@ -217,6 +187,60 @@ public class ZRouter3Processor extends AbstractProcessor {
         }
 
         return true;
+    }
+
+    // according to Element（Field），to build extras.getXXX()
+    private void buildGetParamsStatement(TypeMirror TYPE_PARCELABLE, MethodSpec.Builder bindViewMethodSpecBuilder, Element item) {
+        ZParams diView = item.getAnnotation(ZParams.class);
+        if (diView == null) {
+            return;
+        }
+        TypeMirror fieldType = item.asType();
+        String fieldTypeName = fieldType.toString();
+        switch (fieldTypeName) {
+            case "byte":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getByte(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "byte[]":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getByteArray(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "char":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getChar(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "char[]":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getCharArray(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "float":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getFloat(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "float[]":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getFloatArray(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "ArrayList<Integer>":
+            case "List<Integer>":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getIntegerArrayList(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "boolean[]":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getBooleanArrayExtra(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "boolean":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getBooleanExtra(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "java.lang.String":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getString(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            case "int":
+            case "Integer":
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getInt(\"%s\")", item.getSimpleName(), diView.value()));
+                break;
+            default:
+                if (mTypes.isSubtype(fieldType, TYPE_PARCELABLE)) {  // PARCELABLE
+                    bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = extras.getParcelable(\"%s\")", item.getSimpleName(), diView.value()));
+                } else {
+                    bindViewMethodSpecBuilder.addStatement(String.format("%s = (\"%s\") (%s)", item.getSimpleName(), diView.value(), fieldType.toString()));
+                }
+                break;
+        }
     }
 
 
