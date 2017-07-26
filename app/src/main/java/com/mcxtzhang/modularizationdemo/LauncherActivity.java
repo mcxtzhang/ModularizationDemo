@@ -17,7 +17,9 @@ public class LauncherActivity extends AppCompatActivity {
         getWindow().getDecorView().findViewById(R.id.activity_launcher).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZRouterManager.jump(LauncherActivity.this, "main", null);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Key.KEY_INT, 250);
+                ZRouterManager.jump(LauncherActivity.this, "main", bundle);
             }
         });
 

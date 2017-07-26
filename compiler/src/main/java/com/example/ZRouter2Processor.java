@@ -104,7 +104,7 @@ public class ZRouter2Processor extends AbstractProcessor {
                 if (diView == null) {
                     continue;
                 }
-                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = intent.getStringExtra(\"%s\")", item.getSimpleName(), diView.key()));
+                bindViewMethodSpecBuilder.addStatement(String.format("activity.%s = intent.getStringExtra(\"%s\")", item.getSimpleName(), diView.value()));
             }
             bindViewMethodSpecBuilder.endControlFlow();
 

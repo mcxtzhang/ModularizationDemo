@@ -1,5 +1,6 @@
 package com.example;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
@@ -17,7 +18,7 @@ public class AptUtils {
     public static boolean DEBUG = true;
     public static final String PKG_NAME = "com.mcxtzhang.zrouter";
 
-    public static String getPkgName(Elements element, TypeElement type) /*throws Exception */ {
+    public static String getPkgName(Elements element, Element type) /*throws Exception */ {
 
         PackageElement pkg = element.getPackageOf(type);
         if (null != pkg && !pkg.isUnnamed()) {

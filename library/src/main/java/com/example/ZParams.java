@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.CLASS)
 public @interface ZParams {
-    String key();
+    String value();
 }

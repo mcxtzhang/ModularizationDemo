@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class ZRouterManager {
 
-    private static final String TAG = "zxt/ZRouter";
+    private static final String TAG = "zxt/ZRouterBindHelper";
 
     private static Map<String, String> routerMap = new HashMap<>();
 
