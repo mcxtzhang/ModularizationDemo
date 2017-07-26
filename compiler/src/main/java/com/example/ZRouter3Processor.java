@@ -97,6 +97,7 @@ public class ZRouter3Processor extends AbstractProcessor {
 
         //traverse annotation named ZRtouer
         Set<? extends Element> elements = roundEnvironment.getElementsAnnotatedWith(ZRouter.class);
+        int i = 0;
         for (Element element : elements) {
             TypeElement typeElement;
             if (element instanceof TypeElement) {
@@ -104,12 +105,6 @@ public class ZRouter3Processor extends AbstractProcessor {
             } else {
                 return false;
             }
-            ZRouter zRouter = typeElement.getAnnotation(ZRouter.class);
-            String className = typeElement.getQualifiedName().toString();
-            ClassName RouterManagerClass = ClassName.get(AptUtils.PKG_NAME, "ZRouterManager");
-            initBuilder.addStatement("$T.addRule($S, $S)", RouterManagerClass, zRouter.path(), className);
-
-            //2017 02 04 add auto bind params value in bundle for target activity
 
             TypeMirror TYPE_ACTIVITY = mElementUtils.getTypeElement("android.app.Activity").asType();
             TypeMirror TYPE_FRAGMENT = mElementUtils.getTypeElement("android.app.Fragment").asType();
@@ -117,7 +112,27 @@ public class ZRouter3Processor extends AbstractProcessor {
 
             boolean isActivity = mTypes.isSubtype(typeElement.asType(), TYPE_ACTIVITY);
 
+            ZRouter zRouter = typeElement.getAnnotation(ZRouter.class);
+            String className = typeElement.getQualifiedName().toString();
+            ClassName RouterManagerClass = ClassName.get(AptUtils.PKG_NAME, "ZRouterManager");
 
+            //initBuilder.addStatement("$T.addRule($S, $S)", RouterManagerClass, zRouter.path(), className);
+            i++;
+            String recordName = "record_" + i;
+            ClassName recordClass = ClassName.get("com.mctzhang.zrouter", "ZRouterRecord");
+
+            initBuilder.addStatement("$T $L = new $T()", recordClass, recordName, recordClass);//ZRouterRecord record = new ZRouterRecord("className");
+            initBuilder.addStatement("$L.setClassPath($S)", recordName, className);
+            if (isActivity) {
+                initBuilder.addStatement("$L.setType($T.TYPE_ACTIVITIY)", recordName, recordClass);
+            } else {
+                initBuilder.addStatement("$L.setType($T.TYPE_FRAGMENT)", recordName, recordClass);
+            }
+            initBuilder.addStatement("$T.addRule($S,$L)", RouterManagerClass, zRouter.path(), recordName);
+            //...............init routermap code end................
+
+
+            //2017 02 04 add auto bind params value in bundle for target activity
             List<? extends Element> members = mElementUtils.getAllMembers(typeElement);
             MethodSpec.Builder bindViewMethodSpecBuilder = MethodSpec.methodBuilder("bind")
                     .addModifiers(Modifier.PUBLIC/*, Modifier.STATIC*/)

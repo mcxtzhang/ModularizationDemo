@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Intro:
+ * Intro: 路由自动绑定类
  * Author: zhangxutong
  * E-mail: mcxtzhang@163.com
  * Home Page: http://blog.csdn.net/zxt0601

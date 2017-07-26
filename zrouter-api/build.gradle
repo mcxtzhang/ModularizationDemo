@@ -30,4 +30,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     provided project(':zrouter-stub')
+    compile project(':library')
 }

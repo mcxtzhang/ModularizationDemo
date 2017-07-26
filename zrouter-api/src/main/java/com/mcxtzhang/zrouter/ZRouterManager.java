@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mctzhang.zrouter.ZRouterRecord;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Intro:
+ * Intro: 路由跳转管理类
  * Author: zhangxutong
  * E-mail: mcxtzhang@163.com
  * Home Page: http://blog.csdn.net/zxt0601
@@ -26,10 +28,10 @@ public class ZRouterManager {
 
     private static final String TAG = "zxt/ZRouterManager";
 
-    private static Map<String, String> routerMap = new HashMap<>();
+    private static Map<String, ZRouterRecord> routerMap = new HashMap<>();
 
-    public static void addRule(String pagePath, String pageClsName) {
-        routerMap.put(pagePath, pageClsName);
+    public static void addRule(String pagePath, ZRouterRecord record) {
+        routerMap.put(pagePath, record);
     }
 
     private static void initRouterMap() {
@@ -57,23 +59,32 @@ public class ZRouterManager {
     public static Intent getJumpIntent(Activity activity, String where, Bundle bundle) {
         initRouterMap();
 
-        String clsFullName = routerMap.get(where);
-        if (TextUtils.isEmpty(clsFullName)) {
+        ZRouterRecord record = routerMap.get(where);
+        if (null == record) {
             Log.e(TAG, "Error in getJumpIntent() where = [" + where + "] not found in routerMap!");
             return null;
+        }
+        String clsFullName = record.getClassPath();
+        if (TextUtils.isEmpty(clsFullName)) {
+            Log.e(TAG, "Error in getJumpIntent() clsFullName = [" + clsFullName + "] can not be null");
+            return null;
         } else {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(activity.getPackageName(), clsFullName));
-            if (null != bundle) {
-                intent.putExtras(bundle);
-            }
+            if (record.isActivity()) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName(activity.getPackageName(), clsFullName));
+                if (null != bundle) {
+                    intent.putExtras(bundle);
+                }
 
-            PackageManager packageManager = activity.getPackageManager();
-            List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
-            if (!activities.isEmpty()) {
-                return intent;
+                PackageManager packageManager = activity.getPackageManager();
+                List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+                if (!activities.isEmpty()) {
+                    return intent;
+                } else {
+                    Log.e(TAG, "Error in getJumpIntent() intent = [" + intent + "] not found in PackageManager!");
+                    return null;
+                }
             } else {
-                Log.e(TAG, "Error in getJumpIntent() intent = [" + intent + "] not found in PackageManager!");
                 return null;
             }
         }
