@@ -3,11 +3,14 @@ package com.mcxtzhang.zrouter;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +24,7 @@ import java.util.Map;
 
 public class ZRouterManager {
 
-    private static final String TAG = "zxt/ZRouterBindHelper";
+    private static final String TAG = "zxt/ZRouterManager";
 
     private static Map<String, String> routerMap = new HashMap<>();
 
@@ -36,37 +39,45 @@ public class ZRouterManager {
     }
 
     public static void jump(Activity activity, String where, Bundle bundle) {
-        initRouterMap();
-
-        String clsFullName = routerMap.get(where);
-        if (TextUtils.isEmpty(clsFullName)) {
-            Log.e(TAG, "Error in jump() where = [" + where + "] not found in routerMap!");
-        } else {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(activity.getPackageName(), clsFullName));
-            if (null != bundle) {
-                intent.putExtras(bundle);
-            }
+        Intent intent = getJumpIntent(activity, where, bundle);
+        if (intent != null) {
             activity.startActivity(intent);
             Log.d(TAG, "Jump success:" + where);
         }
     }
 
     public static void jump(Activity activity, String where, Bundle bundle, int requestCode) {
-        initRouterMap();
+        Intent intent = getJumpIntent(activity, where, bundle);
+        if (intent != null) {
+            activity.startActivityForResult(intent, requestCode);
+            Log.d(TAG, "Jump success:" + where);
+        }
+    }
 
+    public static Intent getJumpIntent(Activity activity, String where, Bundle bundle) {
+        initRouterMap();
 
         String clsFullName = routerMap.get(where);
         if (TextUtils.isEmpty(clsFullName)) {
-            Log.e(TAG, "Error in jump() where = [" + where + "] not found in routerMap!");
+            Log.e(TAG, "Error in getJumpIntent() where = [" + where + "] not found in routerMap!");
+            return null;
         } else {
             Intent intent = new Intent();
             intent.setComponent(new ComponentName(activity.getPackageName(), clsFullName));
             if (null != bundle) {
                 intent.putExtras(bundle);
             }
-            activity.startActivityForResult(intent, requestCode);
-            Log.d(TAG, "Jump success:" + where);
+
+            PackageManager packageManager = activity.getPackageManager();
+            List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+            if (!activities.isEmpty()) {
+                return intent;
+            } else {
+                Log.e(TAG, "Error in getJumpIntent() intent = [" + intent + "] not found in PackageManager!");
+                return null;
+            }
         }
+
     }
+
 }

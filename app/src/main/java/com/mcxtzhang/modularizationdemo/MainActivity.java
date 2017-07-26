@@ -11,6 +11,7 @@ import com.example.DIView;
 import com.example.ZParams;
 import com.example.ZRouter;
 import com.mcxtzhang.zrouter.ZRouterBinder;
+import com.mcxtzhang.zrouter.ZRouterManager;
 
 @DIActivity
 @ZRouter(path = "main")
@@ -47,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.KEY_INT, "是张旭童 ");
+                ZRouterManager.jump(MainActivity.this, "subpkg", bundle);
             }
         });
 
