@@ -84,8 +84,12 @@ public class ZRouterManager {
                     Log.e(TAG, "Error in getJumpIntent() intent = [" + intent + "] not found in PackageManager!");
                     return null;
                 }
-            } else {
-                return null;
+            } else {//is fragment
+                Intent commonIntent = getJumpIntent(activity, "commonFragmentActivity", bundle);
+                if (null != commonIntent) {
+                    commonIntent.putExtra("key-fragment-name", clsFullName);
+                }
+                return commonIntent;
             }
         }
 

@@ -44,15 +44,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
+
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
-
 
                 Bundle bundle = new Bundle();
                 bundle.putString(Key.KEY_INT, "是张旭童 ");
                 ZRouterManager.jump(MainActivity.this, "subpkg", bundle);
+            }
+        });
+        mButton2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.KEY_INT, "是张旭童 ");
+                ZRouterManager.jump(MainActivity.this, "frag/frag1", null);
+
+                return true;
             }
         });
 
