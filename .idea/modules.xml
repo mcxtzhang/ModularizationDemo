@@ -8,8 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/common-lib/common-lib.iml" filepath="$PROJECT_DIR$/common-lib/common-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter.iml" filepath="$PROJECT_DIR$/zrouter/zrouter.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter-api/zrouter-api.iml" filepath="$PROJECT_DIR$/zrouter-api/zrouter-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zrouter-stub/zrouter-stub.iml" filepath="$PROJECT_DIR$/zrouter-stub/zrouter-stub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" />
     </modules>
   </component>
 </project>
