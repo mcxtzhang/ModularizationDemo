@@ -2,6 +2,8 @@ package debug;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.mcxtzhang.bbs.BbsMainActivity;
 import com.mcxtzhang.common_lib.BaseActivity;
@@ -18,7 +20,15 @@ public class DebugLauncherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, BbsMainActivity.class));
-        finish();
+        Button button = new Button(this);
+        button.setText("Debug Launcher");
+        setContentView(button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DebugLauncherActivity.this, BbsMainActivity.class));
+                finish();
+            }
+        });
     }
 }

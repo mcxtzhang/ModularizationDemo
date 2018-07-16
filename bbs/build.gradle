@@ -34,12 +34,9 @@ android {
     sourceSets {
         main {
             if (modularizationDebug.toBoolean()) {
-                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+
             } else {
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                java {
-                    exclude 'debug/**'
-                }
+
             }
         }
     }
