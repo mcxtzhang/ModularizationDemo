@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ZParams;
-import com.example.ZRouter;
 import com.mcxtzhang.modularizationdemo.R;
 import com.mcxtzhang.zrouter.ZRouterBinder;
+import com.zrouter.ZParams;
+import com.zrouter.ZRouter;
 
 /**
  * A simple {@link Fragment} subclass.

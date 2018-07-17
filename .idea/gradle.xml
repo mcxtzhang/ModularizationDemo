@@ -12,10 +12,10 @@
             <option value="$PROJECT_DIR$/bbs" />
             <option value="$PROJECT_DIR$/buy" />
             <option value="$PROJECT_DIR$/common-lib" />
-            <option value="$PROJECT_DIR$/compiler" />
-            <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/zrouter" />
-            <option value="$PROJECT_DIR$/zrouter-api" />
+            <option value="$PROJECT_DIR$/zrouter/zrouter-annotation" />
+            <option value="$PROJECT_DIR$/zrouter/zrouter-api" />
+            <option value="$PROJECT_DIR$/zrouter/zrouter-compile" />
             <option value="$PROJECT_DIR$/zrouter/zrouter-stub" />
           </set>
         </option>

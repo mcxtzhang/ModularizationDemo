@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.ZRouter;
 import com.mcxtzhang.zrouter.ZRouterManager;
+import com.zrouter.ZRouter;
 
 @ZRouter("buy/main")
 public class BuyMainActivity extends AppCompatActivity {

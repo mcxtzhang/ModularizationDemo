@@ -42,7 +42,8 @@ dependencies {
     }
 
 
-    apt project(':compiler')
+    //ZRouter
+    apt project(':zrouter:zrouter-compile')
 
     compile project(':common-lib')
 

@@ -7,8 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
 
-import com.example.ZModules;
 import com.mcxtzhang.zrouter.ZRouterManager;
+import com.zrouter.ZModules;
 
 import java.util.List;
 

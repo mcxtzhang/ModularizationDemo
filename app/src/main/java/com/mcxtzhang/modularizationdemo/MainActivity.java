@@ -5,14 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.DIActivity;
-import com.example.DIView;
-import com.example.ZParams;
-import com.example.ZRouter;
 import com.mcxtzhang.zrouter.ZRouterBinder;
 import com.mcxtzhang.zrouter.ZRouterManager;
+import com.zrouter.ZParams;
+import com.zrouter.ZRouter;
 
-@DIActivity
 @ZRouter(value = "main")
 public class MainActivity extends AppCompatActivity {
 
@@ -23,14 +20,13 @@ public class MainActivity extends AppCompatActivity {
     @ZParams(Key.KEY_INT)
     String mId3;
 
-    @DIView(R.id.btnModule2)
     Button mButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ZBindMainActivity.bindView(this);
+        //ZBindMainActivity.bindView(this);
 
         ZRouterBinder.bind(this);
 
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
-
+        mButton2 = (Button) findViewById(R.id.btnModule2);
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

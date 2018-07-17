@@ -3,8 +3,8 @@ package com.mcxtzhang.bbs;
 
 import android.os.Bundle;
 
-import com.example.ZRouter;
 import com.mcxtzhang.common_lib.BaseActivity;
+import com.zrouter.ZRouter;
 
 /**
  * 模块一的 主Activity

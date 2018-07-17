@@ -53,7 +53,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 
-    apt project(':compiler')
+    //apt area
+    //ZRouter
+    apt project(':zrouter:zrouter-compile')
 
     compile project(':common-lib')
 }

@@ -3,8 +3,8 @@ package com.mcxtzhang.modularizationdemo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.ZRouter;
 import com.mcxtzhang.zrouter.ZRouterManager;
+import com.zrouter.ZRouter;
 
 @ZRouter(value = "launcher")
 public class LauncherActivity extends AppCompatActivity {

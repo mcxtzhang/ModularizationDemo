@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.example.ZParams;
-import com.example.ZRouter;
 import com.mcxtzhang.modularizationdemo.Key;
 import com.mcxtzhang.modularizationdemo.R;
 import com.mcxtzhang.zrouter.ZRouterBinder;
+import com.zrouter.ZParams;
+import com.zrouter.ZRouter;
 
 @ZRouter(value = "subpkg")
 public class SubPkgActivity extends AppCompatActivity {

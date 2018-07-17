@@ -1,11 +1,12 @@
 //主壳  必备的
-include ':app', ':zrouter-api', ':zrouter:zrouter-stub', ':buy'
+include ':app'
 
 //debug 是Application， release 是 aar
 include ':bbs'
+include ':buy'
 
 //公共库 必备的
 include ':common-lib'
 
 
-include ':library', ':compiler'
+include ':zrouter:zrouter-api', ':zrouter:zrouter-stub', ':zrouter:zrouter-compile', ':zrouter:zrouter-annotation'

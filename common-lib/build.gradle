@@ -29,6 +29,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 
-    compile project(':library')
-    compile project(':zrouter-api')
+
+    //ZRouter
+    compile project(':zrouter:zrouter-annotation')
+    compile project(':zrouter:zrouter-api')
 }

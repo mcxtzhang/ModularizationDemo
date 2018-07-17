@@ -40,6 +40,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':common-lib')
-    apt project(':compiler')
+    //apt area
+    //ZRouter
+    apt project(':zrouter:zrouter-compile')
 
 }
