@@ -8,12 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/buy/buy.iml" filepath="$PROJECT_DIR$/buy/buy.iml" />
       <module fileurl="file://$PROJECT_DIR$/common-lib/common-lib.iml" filepath="$PROJECT_DIR$/common-lib/common-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter.iml" filepath="$PROJECT_DIR$/zrouter/zrouter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter.iml" filepath="$PROJECT_DIR$/zrouter/zrouter.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-annotation/zrouter-annotation.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-annotation/zrouter-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-api/zrouter-api.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-api/zrouter-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-compile/zrouter-compile.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-compile/zrouter-compile.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-compile/zrouter-compile.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-compile/zrouter-compile.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-stub/zrouter-stub.iml" />
       <module fileurl="file://$PROJECT_DIR$/zrouter/zrouter-api/zrouter-zrouter-api.iml" filepath="$PROJECT_DIR$/zrouter/zrouter-api/zrouter-zrouter-api.iml" />
     </modules>

@@ -31,7 +31,7 @@ public class ZRouterBinder {
                 classCache.put(className, paramsBinding);
             }
         } catch (Exception ex) {
-            blackList.add(className);    // This instance need not autowired.
+            blackList.add(className);    // This instance need not autobind.
         }
     }
 }

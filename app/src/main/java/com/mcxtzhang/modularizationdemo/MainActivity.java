@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnModule1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JumpUtils.jumpToModule1(MainActivity.this);
+                ZRouterManager.jump(MainActivity.this, "bbs/Main");
+
             }
         });
 
@@ -44,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZRouterManager.jump(MainActivity.this, "buy/main", null);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Key.KEY_INT, 1024);
+                ZRouterManager.jump(MainActivity.this, "buy/main", bundle);
 
             }
         });

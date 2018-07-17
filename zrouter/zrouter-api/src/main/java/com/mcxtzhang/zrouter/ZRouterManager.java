@@ -115,7 +115,7 @@ public class ZRouterManager {
             if (record.isFragment()) {
                 return Fragment.instantiate(context, record.getClassPath(), bundle);
             } else {
-                Log.e(TAG, "Error in getFragment() path = [" + path + "] is not a activity");
+                Log.e(TAG, "Error in getFragment() path = [" + path + "] is not a Fragment");
                 return null;
             }
         }
@@ -141,7 +141,7 @@ public class ZRouterManager {
             if (record.isFragment()) {
                 return android.support.v4.app.Fragment.instantiate(context, record.getClassPath(), bundle);
             } else {
-                Log.e(TAG, "Error in getFragmentV4() path = [" + path + "] is not a activity");
+                Log.e(TAG, "Error in getFragmentV4() path = [" + path + "] is not a Fragment");
                 return null;
             }
         }
