@@ -128,7 +128,7 @@ public class ZRouter3Processor extends AbstractProcessor {
             } else {
                 initBuilder.addStatement("$L.setType($T.TYPE_FRAGMENT)", recordName, recordClass);
             }
-            initBuilder.addStatement("$T.addRule($S,$L)", RouterManagerClass, zRouter.path(), recordName);
+            initBuilder.addStatement("$T.addRule($S,$L)", RouterManagerClass, zRouter.value(), recordName);
             //...............init routermap code end................
 
 

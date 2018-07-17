@@ -21,7 +21,7 @@ import com.mcxtzhang.zrouter.ZRouterBinder;
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-@ZRouter(path = "frag/frag1")
+@ZRouter(value = "frag/frag1")
 public class BlankFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

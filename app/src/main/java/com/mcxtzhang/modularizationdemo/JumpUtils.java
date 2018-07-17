@@ -20,13 +20,13 @@ import java.util.List;
  * 时间： 2016/12/14.
  */
 
-@ZModules({"app", "bbs"})
+@ZModules({"app", "bbs","buy"})
 public class JumpUtils {
 
     private static final String PK_NAME = "com.mcxtzhang";
 
     public static void jumpToModule1(Activity activity) {
-        //startActivity(new Intent(MainActivity.this, BbsMainActivity.class));
+        //startActivity(new Intent(BuyMainActivity.this, BbsMainActivity.class));
 /*        Intent intent = new Intent();
         try {
             intent.setClass(context,Class.forName("com.mcxtzhang.bbs.BbsMainActivity"));

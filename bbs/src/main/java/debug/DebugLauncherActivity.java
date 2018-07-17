@@ -1,7 +1,9 @@
 package debug;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.mcxtzhang.bbs.BbsMainActivity;
 import com.mcxtzhang.common_lib.BaseActivity;
@@ -18,7 +20,19 @@ public class DebugLauncherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, BbsMainActivity.class));
-        finish();
+        TextView textView = new TextView(this);
+        textView.setText("BbsDebugLaunchActivity");
+        textView.setTextColor(Color.BLACK);
+
+        setContentView(textView);
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(DebugLauncherActivity.this, BbsMainActivity.class));
+                finish();
+            }
+        }, 1000);
+
+
     }
 }

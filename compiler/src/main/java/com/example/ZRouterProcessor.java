@@ -86,7 +86,7 @@ public class ZRouterProcessor extends AbstractProcessor {
             }
             ZRouter zRouter = typeElement.getAnnotation(ZRouter.class);
             String className = typeElement.getQualifiedName().toString();
-            constructorBuilder.addStatement("routerMap.put($S, $S)", zRouter.path(), className);
+            constructorBuilder.addStatement("routerMap.put($S, $S)", zRouter.value(), className);
         }
         MethodSpec constructor = constructorBuilder
                 .build();

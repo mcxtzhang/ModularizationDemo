@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.DIActivity;
 import com.example.DIView;
@@ -14,7 +13,7 @@ import com.mcxtzhang.zrouter.ZRouterBinder;
 import com.mcxtzhang.zrouter.ZRouterManager;
 
 @DIActivity
-@ZRouter(path = "main")
+@ZRouter(value = "main")
 public class MainActivity extends AppCompatActivity {
 
     @ZParams(Key.KEY_INT)
@@ -44,32 +43,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
 
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ZRouterManager.jump(MainActivity.this, "buy/main", null);
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.KEY_INT, "是张旭童 ");
-                ZRouterManager.jump(MainActivity.this, "subpkg", bundle);
             }
         });
-        mButton2.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.KEY_INT, "是张旭童 ");
-                ZRouterManager.jump(MainActivity.this, "frag/frag1", null);
-
-                return true;
-            }
-        });
-
-/*        Bundle extras = getIntent().getExtras();
-        */
-
     }
 
 }

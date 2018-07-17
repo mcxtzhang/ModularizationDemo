@@ -1,5 +1,5 @@
 //主壳  必备的
-include ':app', ':zrouter-api', ':zrouter:zrouter-stub'
+include ':app', ':zrouter-api', ':zrouter:zrouter-stub', ':buy'
 
 //debug 是Application， release 是 aar
 include ':bbs'

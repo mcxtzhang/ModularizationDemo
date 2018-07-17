@@ -10,7 +10,7 @@ import com.mcxtzhang.common_lib.BaseActivity;
  * 模块一的 主Activity
  */
 
-@ZRouter(path = "bbs/Main")
+@ZRouter("bbs/Main")
 public class BbsMainActivity extends BaseActivity {
 
     @Override

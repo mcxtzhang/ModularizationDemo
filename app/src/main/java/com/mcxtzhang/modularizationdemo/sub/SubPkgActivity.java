@@ -10,7 +10,7 @@ import com.mcxtzhang.modularizationdemo.Key;
 import com.mcxtzhang.modularizationdemo.R;
 import com.mcxtzhang.zrouter.ZRouterBinder;
 
-@ZRouter(path = "subpkg")
+@ZRouter(value = "subpkg")
 public class SubPkgActivity extends AppCompatActivity {
     @ZParams(Key.KEY_INT)
     String mId;

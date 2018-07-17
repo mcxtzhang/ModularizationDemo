@@ -88,7 +88,7 @@ public class ZRouter2Processor extends AbstractProcessor {
             }
             ZRouter zRouter = typeElement.getAnnotation(ZRouter.class);
             String className = typeElement.getQualifiedName().toString();
-            constructorBuilder.addStatement("routerMap.put($S, $S)", zRouter.path(), className);
+            constructorBuilder.addStatement("routerMap.put($S, $S)", zRouter.value(), className);
 
             //2017 02 04 add auto bind params value in bundle for target activity
             List<? extends Element> members = mElementUtils.getAllMembers(typeElement);

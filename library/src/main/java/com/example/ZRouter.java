@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
 public @interface ZRouter {
-    public String path() default "";
+    public String value() default "";
 }
