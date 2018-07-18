@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mcxtzhang.zrouter.ZRouterManager;
+import com.zrouter.ZModules;
 import com.zrouter.ZRouter;
 
+@ZModules({"app", "bbs","buy"})
 @ZRouter(value = "launcher")
 public class LauncherActivity extends AppCompatActivity {
 

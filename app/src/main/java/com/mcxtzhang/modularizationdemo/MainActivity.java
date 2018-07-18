@@ -12,12 +12,13 @@ import com.zrouter.ZRouter;
 
 @ZRouter(value = "main")
 public class MainActivity extends AppCompatActivity {
+    public static final String KEY_INT = "KEY_INT";
 
-    @ZParams(Key.KEY_INT)
+    @ZParams(KEY_INT)
     int mId;
-    @ZParams(Key.KEY_INT)
+    @ZParams(KEY_INT)
     byte[] mId2;
-    @ZParams(Key.KEY_INT)
+    @ZParams(KEY_INT)
     String mId3;
 
     Button mButton2;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt(Key.KEY_INT, 1024);
+                bundle.putInt(KEY_INT, 1024);
                 ZRouterManager.jump(MainActivity.this, "buy/main", bundle);
 
             }
