@@ -1,4 +1,4 @@
-package com.mcxtzhang.modularizationdemo.frag;
+package com.mcxtzhang.bbs;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mcxtzhang.modularizationdemo.R;
 import com.mcxtzhang.zrouter.ZRouterBinder;
 import com.zrouter.ZParams;
 import com.zrouter.ZRouter;
@@ -21,7 +20,7 @@ import com.zrouter.ZRouter;
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-@ZRouter(value = "frag/frag1")
+@ZRouter(value = "fragment")
 public class BlankFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,8 +83,7 @@ public class BlankFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
         }
     }
 

@@ -47,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.btnModule3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findViewById(R.id.frameLayout);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, ZRouterManager.getFragmentV4(MainActivity.this, "fragment"))
+                        .commit();
+            }
+        });
     }
 
 }
