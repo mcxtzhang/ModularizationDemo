@@ -31,7 +31,7 @@ public class DebugLauncherActivity extends BaseActivity {
                 startActivity(new Intent(DebugLauncherActivity.this, BbsMainActivity.class));
                 finish();
             }
-        }, 1000);
+        }, 2000);
 
 
     }

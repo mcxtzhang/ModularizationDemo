@@ -25,7 +25,7 @@ public class BuyDebugLaunchActivity extends Activity {
                 startActivity(new Intent(BuyDebugLaunchActivity.this, BuyMainActivity.class));
                 finish();
             }
-        }, 1000);
+        }, 2000);
 
     }
 }

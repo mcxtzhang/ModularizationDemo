@@ -26,11 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ZBindMainActivity.bindView(this);
 
+        //auto-bind
         ZRouterBinder.bind(this);
-
-        //ZRouterBindHelper.bind(this);
 
         findViewById(R.id.btnModule1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        //Toast.makeText(MainActivity.this, "接受到的值是" + mId, Toast.LENGTH_SHORT).show();
         mButton2 = (Button) findViewById(R.id.btnModule2);
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
